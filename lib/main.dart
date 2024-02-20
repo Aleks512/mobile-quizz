@@ -35,6 +35,19 @@ class QuizPage extends StatefulWidget {
 class _QuizPageState extends State<QuizPage> {
   List<Icon> scorekeeper = [];
 
+  void chackAnswer(bool userPickedAnswer) {
+    bool correctAnswer = quizBrain.getAnwer();
+
+    if (correctAnswer == true) {
+      print("OK");
+    } else {
+      print("sorry,...");
+    }
+    setState(() {
+      quizBrain.nextQuestion();
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -73,17 +86,7 @@ class _QuizPageState extends State<QuizPage> {
                 ),
                 onPressed: () {
                   //The user picked true.
-
-                  bool correctAnswer = quizBrain.getAnwer();
-
-                  if (correctAnswer == true) {
-                    print("OK");
-                  } else {
-                    print("sorry,...");
-                  }
-                  setState(() {
-                    quizBrain.nextQuestion();
-                  });
+                  chackAnswer(true);
                 }),
           ),
         ),
@@ -91,30 +94,20 @@ class _QuizPageState extends State<QuizPage> {
           child: Padding(
             padding: const EdgeInsets.all(15.0),
             child: TextButton(
-              style: TextButton.styleFrom(
-                backgroundColor: const Color.fromARGB(255, 232, 55, 6),
-              ),
-              child: const Text(
-                'False',
-                style: TextStyle(
-                  fontSize: 20.0,
-                  color: Colors.white,
+                style: TextButton.styleFrom(
+                  backgroundColor: const Color.fromARGB(255, 232, 55, 6),
                 ),
-              ),
-              onPressed: () {
-                //The user picked true.
-
-                bool correctAnswer = quizBrain.getAnwer();
-                if (correctAnswer == false) {
-                  print("OK");
-                } else {
-                  print("sorry,...");
-                }
-                setState(() {
-                  quizBrain.nextQuestion();
-                });
-              },
-            ),
+                child: const Text(
+                  'False',
+                  style: TextStyle(
+                    fontSize: 20.0,
+                    color: Colors.white,
+                  ),
+                ),
+                onPressed: () {
+                  //The user picked true.
+                  chackAnswer(false);
+                }),
           ),
         ),
         //TODO: Add a Row here as your score keeper
