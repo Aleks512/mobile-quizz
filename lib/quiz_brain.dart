@@ -38,7 +38,7 @@ class QuizBrain {
     return _questionBank[_questionNumber].questionText;
   }
 
-  bool getAnwer() {
+  bool getAnswer() {
     return _questionBank[_questionNumber].questionAnswer;
   }
 }

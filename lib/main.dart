@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'quiz_brain.dart';
+import 'package:rflutter_alert/rflutter_alert.dart';
 
 QuizBrain quizBrain = QuizBrain();
 
@@ -33,17 +34,22 @@ class QuizPage extends StatefulWidget {
 }
 
 class _QuizPageState extends State<QuizPage> {
-  List<Icon> scorekeeper = [];
+  List<Icon> scoreKeeper = [];
 
-  void chackAnswer(bool userPickedAnswer) {
-    bool correctAnswer = quizBrain.getAnwer();
-
-    if (correctAnswer == true) {
-      print("OK");
-    } else {
-      print("sorry,...");
-    }
+  void checkAnswer(bool userPickedAnswer) {
+    bool correctAnswer = quizBrain.getAnswer();
     setState(() {
+      if (userPickedAnswer == correctAnswer) {
+        scoreKeeper.add(const Icon(
+          Icons.check,
+          color: Colors.green,
+        ));
+      } else {
+        scoreKeeper.add(const Icon(
+          Icons.close,
+          color: Colors.red,
+        ));
+      }
       quizBrain.nextQuestion();
     });
   }
@@ -57,12 +63,12 @@ class _QuizPageState extends State<QuizPage> {
         Expanded(
           flex: 5,
           child: Padding(
-            padding: EdgeInsets.all(10.0),
+            padding: const EdgeInsets.all(10.0),
             child: Center(
               child: Text(
                 quizBrain.getQuestionText(),
                 textAlign: TextAlign.center,
-                style: TextStyle(
+                style: const TextStyle(
                   fontSize: 25.0,
                   color: Colors.white,
                 ),
@@ -74,43 +80,41 @@ class _QuizPageState extends State<QuizPage> {
           child: Padding(
             padding: const EdgeInsets.all(15.0),
             child: TextButton(
-                style: TextButton.styleFrom(
-                  backgroundColor: const Color.fromARGB(255, 44, 97, 59),
+              style: TextButton.styleFrom(
+                backgroundColor: Colors.green,
+              ),
+              child: const Text(
+                'True',
+                style: TextStyle(
+                  color: Colors.white,
+                  fontSize: 20.0,
                 ),
-                child: const Text(
-                  'True',
-                  style: TextStyle(
-                    color: Colors.white,
-                    fontSize: 20.0,
-                  ),
-                ),
-                onPressed: () {
-                  //The user picked true.
-                  chackAnswer(true);
-                }),
+              ),
+              onPressed: () => checkAnswer(true),
+            ),
           ),
         ),
         Expanded(
           child: Padding(
             padding: const EdgeInsets.all(15.0),
             child: TextButton(
-                style: TextButton.styleFrom(
-                  backgroundColor: const Color.fromARGB(255, 232, 55, 6),
+              style: TextButton.styleFrom(
+                backgroundColor: Colors.red,
+              ),
+              child: const Text(
+                'False',
+                style: TextStyle(
+                  fontSize: 20.0,
+                  color: Colors.white,
                 ),
-                child: const Text(
-                  'False',
-                  style: TextStyle(
-                    fontSize: 20.0,
-                    color: Colors.white,
-                  ),
-                ),
-                onPressed: () {
-                  //The user picked true.
-                  chackAnswer(false);
-                }),
+              ),
+              onPressed: () => checkAnswer(false),
+            ),
           ),
         ),
-        //TODO: Add a Row here as your score keeper
+        Row(
+          children: scoreKeeper,
+        ),
       ],
     );
   }
