@@ -1,6 +1,7 @@
 import 'question.dart';
 
 class QuizBrain {
+  int _questionNumber = 0;
   List<Question> _questionBank = [
     Question('La Tour Eiffel se trouve à Londres.', false),
     Question('La lumière du soleil met environ 8 minutes à atteindre la Terre.',
@@ -25,13 +26,19 @@ class QuizBrain {
     Question('Le cœur humain bat à droite du corps.', false),
   ];
 
-  String getQuestionText(int questionNumber) {
-    return _questionBank[questionNumber].questionText;
+  void nextQuestion() {
+    if (_questionNumber < _questionBank.length-1) {
+      _questionNumber++;
+    }
+    print(_questionNumber);
+    print(_questionBank.length);
   }
-    bool getAnwer(int questionNumber) {
-    return _questionBank[questionNumber].questionAnswer;
+
+  String getQuestionText() {
+    return _questionBank[_questionNumber].questionText;
   }
 
-
-
+  bool getAnwer() {
+    return _questionBank[_questionNumber].questionAnswer;
+  }
 }

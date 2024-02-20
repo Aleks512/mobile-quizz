@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'question.dart';
 import 'quiz_brain.dart';
 
 QuizBrain quizBrain = QuizBrain();
@@ -35,7 +34,6 @@ class QuizPage extends StatefulWidget {
 
 class _QuizPageState extends State<QuizPage> {
   List<Icon> scorekeeper = [];
-  int questionNumber = 0;
 
   @override
   Widget build(BuildContext context) {
@@ -49,8 +47,7 @@ class _QuizPageState extends State<QuizPage> {
             padding: EdgeInsets.all(10.0),
             child: Center(
               child: Text(
-                quizBrain.getQuestionText(questionNumber),
-                // questionBank is a propert of the object quizBrain OBJECT
+                quizBrain.getQuestionText(),
                 textAlign: TextAlign.center,
                 style: TextStyle(
                   fontSize: 25.0,
@@ -64,32 +61,30 @@ class _QuizPageState extends State<QuizPage> {
           child: Padding(
             padding: const EdgeInsets.all(15.0),
             child: TextButton(
-              style: TextButton.styleFrom(
-                backgroundColor: const Color.fromARGB(255, 44, 97, 59),
-              ),
-              child: const Text(
-                'True',
-                style: TextStyle(
-                  color: Colors.white,
-                  fontSize: 20.0,
+                style: TextButton.styleFrom(
+                  backgroundColor: const Color.fromARGB(255, 44, 97, 59),
                 ),
-              ),
-              onPressed: () {
-                //The user picked true.
+                child: const Text(
+                  'True',
+                  style: TextStyle(
+                    color: Colors.white,
+                    fontSize: 20.0,
+                  ),
+                ),
+                onPressed: () {
+                  //The user picked true.
 
-                bool correctAnswer = quizBrain.getAnwer(questionNumber);
-                    
-                if (correctAnswer == true) {
-                  print("OK");
-                } else {
-                  print("sorry,...");
-                }
-                setState(() {
-                  questionNumber++;
-                });
-                print(questionNumber);
-              },
-            ),
+                  bool correctAnswer = quizBrain.getAnwer();
+
+                  if (correctAnswer == true) {
+                    print("OK");
+                  } else {
+                    print("sorry,...");
+                  }
+                  setState(() {
+                    quizBrain.nextQuestion();
+                  });
+                }),
           ),
         ),
         Expanded(
@@ -109,16 +104,15 @@ class _QuizPageState extends State<QuizPage> {
               onPressed: () {
                 //The user picked true.
 
-                bool correctAnswer = quizBrain.getAnwer(questionNumber);
+                bool correctAnswer = quizBrain.getAnwer();
                 if (correctAnswer == false) {
                   print("OK");
                 } else {
                   print("sorry,...");
                 }
                 setState(() {
-                  questionNumber++;
+                  quizBrain.nextQuestion();
                 });
-                print(questionNumber);
               },
             ),
           ),
