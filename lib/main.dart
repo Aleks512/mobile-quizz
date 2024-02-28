@@ -40,6 +40,24 @@ class _QuizPageState extends State<QuizPage> {
   void checkAnswer(bool userPickedAnswer) {
     bool correctAnswer = quizBrain.getAnswer();
     setState(() {
+
+      //Step 4 - Use IF/ELSE to check if we've reached the end of the quiz. If so,
+      //On the next line, you can also use if (quizBrain.isFinished()) {}, it does the same thing.
+      if (quizBrain.isFinished() == true) {
+        // show an alert using rFlutter_alert,
+        Alert(
+          context: context,
+          title: 'Finished!',
+          desc: 'You\'ve reached the end of the quiz.',
+        ).show();
+
+        //TODO Step 4 Part C - reset the questionNumber,
+        quizBrain.reset();
+
+        //TODO Step 4 Part D - empty out the scoreKeeper.
+        scoreKeeper = [];
+      }
+
       if (userPickedAnswer == correctAnswer) {
         scoreKeeper.add(const Icon(
           Icons.check,
