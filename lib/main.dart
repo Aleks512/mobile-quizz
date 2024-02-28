@@ -7,6 +7,12 @@ QuizBrain quizBrain = QuizBrain();
 void main() => runApp(const Quizzler());
 
 class Quizzler extends StatelessWidget {
+  /// A class representing the Quizzler app.
+  /// This class is responsible for creating the main app widget and setting up the app's UI.
+  /// The app displays a quiz page where users can answer multiple-choice questions.
+  /// The app has a dark theme with a black background color.
+  /// The quiz page is wrapped in a safe area and padded horizontally.
+
   const Quizzler({super.key});
 
   @override
@@ -45,8 +51,9 @@ class _QuizPageState extends State<QuizPage> {
     Alert(
       context: context,
       title: "PAS MAL",
-      desc: "demain ce sera encore mieux .",
+      desc: "Ce n'est qu'un début, demain ce sera encore mieux ;)",
       image: Image.asset("images/success.png"),
+      buttons: [], // Fournir un tableau vide pour ne pas afficher de boutons
     ).show();
         //Step 4- reset the questionNumber,
         quizBrain.reset();
@@ -98,7 +105,7 @@ class _QuizPageState extends State<QuizPage> {
             padding: const EdgeInsets.all(15.0),
             child: TextButton(
               style: TextButton.styleFrom(
-                backgroundColor: const Color.fromARGB(255, 52, 248, 59),
+                backgroundColor: Color.fromARGB(255, 32, 93, 34),
               ),
               child: const Text(
                 'Vrai',
