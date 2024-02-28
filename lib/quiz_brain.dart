@@ -25,7 +25,6 @@ class QuizBrain {
     Question('Les araignées ont six pattes.', false),
     Question('Le cœur humain bat à droite du corps.', false),
   ];
-
   void nextQuestion() {
     if (_questionNumber < _questionBank.length-1) {
       _questionNumber++;
@@ -33,7 +32,6 @@ class QuizBrain {
     print(_questionNumber);
     print(_questionBank.length);
   }
-
   String getQuestionText() {
     return _questionBank[_questionNumber].questionText;
   }
@@ -42,20 +40,15 @@ class QuizBrain {
     return _questionBank[_questionNumber].questionAnswer;
   }
   //After imort of package Create a method called isFinished() here that checks to see if we have reached the last question. It should return (have an output) true if we've reached the last question and it should return false if we're not there yet.
-
   bool isFinished() {
     if (_questionNumber >= _questionBank.length - 1) {
       //Step 3 Use a print statement to check that isFinished is returning true when you are indeed at the end of the quiz and when a restart should happen.
-
       print('Now returning true');
       return true;
-
     } else {
       return false;
     }
-  }
-
-    //Step 4 Create a reset() method here that sets the questionNumber back to 0.
+  }//Step 4 Create a reset() method here that sets the questionNumber back to 0.
   void reset() {
     _questionNumber = 0;
   }

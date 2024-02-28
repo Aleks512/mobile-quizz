@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'quiz_brain.dart';
 import 'package:rflutter_alert/rflutter_alert.dart';
-
 
 QuizBrain quizBrain = QuizBrain();
 
@@ -40,37 +40,36 @@ class _QuizPageState extends State<QuizPage> {
   void checkAnswer(bool userPickedAnswer) {
     bool correctAnswer = quizBrain.getAnswer();
     setState(() {
-
       //Step 4 - Use IF/ELSE to check if we've reached the end of the quiz. If so,
       //On the next line, you can also use if (quizBrain.isFinished()) {}, it does the same thing.
       if (quizBrain.isFinished() == true) {
         // show an alert using rFlutter_alert,
         Alert(
           context: context,
-          title: 'Finished!',
-          desc: 'You\'ve reached the end of the quiz.',
+          title: 'FIN!',
+          desc: 'Vous avez terminé le quizz',
         ).show();
-
-        //TODO Step 4 Part C - reset the questionNumber,
+        //Step 4- reset the questionNumber,
         quizBrain.reset();
 
-        //TODO Step 4 Part D - empty out the scoreKeeper.
+        //Step 4  - empty out the scoreKeeper.
         scoreKeeper = [];
-      }
-
-      if (userPickedAnswer == correctAnswer) {
-        scoreKeeper.add(const Icon(
-          Icons.check,
-          color: Colors.green,
-        ));
       } else {
-        scoreKeeper.add(const Icon(
-          Icons.close,
-          color: Colors.red,
-        ));
+        if (userPickedAnswer == correctAnswer) {
+          scoreKeeper.add(const Icon(
+            Icons.check,
+            color: Colors.green,
+          ));
+        } else {
+          scoreKeeper.add(const Icon(
+            Icons.close,
+            color: Colors.red,
+          ));
+        }
+        quizBrain.nextQuestion();
       }
-      quizBrain.nextQuestion();
-    });
+    }
+    );
   }
 
   @override
@@ -131,8 +130,10 @@ class _QuizPageState extends State<QuizPage> {
             ),
           ),
         ),
-        Row(
+        Wrap(
           children: scoreKeeper,
+          spacing: 4.0, // Espace horizontal entre les icônes
+          runSpacing: 4.0, // Espace vertical entre les lignes d'icônes
         ),
       ],
     );
