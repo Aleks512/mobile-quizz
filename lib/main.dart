@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'quiz_brain.dart';
 import 'package:rflutter_alert/rflutter_alert.dart';
 
@@ -40,15 +39,15 @@ class _QuizPageState extends State<QuizPage> {
   void checkAnswer(bool userPickedAnswer) {
     bool correctAnswer = quizBrain.getAnswer();
     setState(() {
-      //Step 4 - Use IF/ELSE to check if we've reached the end of the quiz. If so,
-      //On the next line, you can also use if (quizBrain.isFinished()) {}, it does the same thing.
+      //Step 4 - Use IF/ELSE to check if the end of the quiz 've been reached . If so,
       if (quizBrain.isFinished() == true) {
         // show an alert using rFlutter_alert,
-        Alert(
-          context: context,
-          title: 'FIN!',
-          desc: 'Vous avez terminé le quizz',
-        ).show();
+    Alert(
+      context: context,
+      title: "PAS MAL",
+      desc: "demain ce sera encore mieux .",
+      image: Image.asset("images/success.png"),
+    ).show();
         //Step 4- reset the questionNumber,
         quizBrain.reset();
 
@@ -99,10 +98,10 @@ class _QuizPageState extends State<QuizPage> {
             padding: const EdgeInsets.all(15.0),
             child: TextButton(
               style: TextButton.styleFrom(
-                backgroundColor: Colors.green,
+                backgroundColor: const Color.fromARGB(255, 52, 248, 59),
               ),
               child: const Text(
-                'True',
+                'Vrai',
                 style: TextStyle(
                   color: Colors.white,
                   fontSize: 20.0,
@@ -120,7 +119,7 @@ class _QuizPageState extends State<QuizPage> {
                 backgroundColor: Colors.red,
               ),
               child: const Text(
-                'False',
+                'Faux',
                 style: TextStyle(
                   fontSize: 20.0,
                   color: Colors.white,
