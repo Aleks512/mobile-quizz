@@ -13,7 +13,8 @@ Quizzler est une application mobile interactive conçue avec Flutter. Elle offre
 
 Pour voir Quizzler en action, consultez la démo ici :
 
-![Présentation de Quizzler](images/presentation.gif)
+<img src="images/presentation.gif" width="500" alt="Présentation de Quizzler">
+
 
 ## Comment ça marche ?
 
